@@ -15,6 +15,7 @@ test("Locating multiple elements", async ({page}) => {
     await loginButttonLoc.click();
 
     // Check for the header of the page
+    await page.waitForSelector(".title");
     expect(productsTitle).toBeVisible();
     expect(productsTitle).toHaveText("Products");
 
