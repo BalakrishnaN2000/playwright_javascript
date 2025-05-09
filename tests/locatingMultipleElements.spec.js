@@ -15,8 +15,15 @@ test("Locating multiple elements", async ({page}) => {
     await loginButttonLoc.click();
 
     // Check for the header of the page
-    await expect(productsTitle).toBeVisible({timeout:10000});
-    await expect(productsTitle).toHaveText("Products");
+    // await expect(productsTitle).toBeVisible({timeout:10000});
+    // await expect(productsTitle).toHaveText("Products");
+
+    await page.waitForSelector('.title', { timeout: 10000 });
+    await page.waitForFunction(() => {
+        const el = document.querySelector('.title');
+        return el && el.textContent.trim().includes("Products");
+    });
+
 
     // Wait for the products to load
     await page.waitForSelector(`//a[contains(@id, "title_link")]`);
