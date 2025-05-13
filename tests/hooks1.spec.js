@@ -19,7 +19,7 @@ test("Home page test", async ({page}) => {
     await page.waitForTimeout(2000);
 })
 
-test.only("Add product to cart", async ({page}) => {
+test("Add product to cart", async ({page}) => {
 
     await page.goto("https://www.demoblaze.com/");
 
