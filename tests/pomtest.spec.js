@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test';
 import {LoginPage} from '../pages/loginPage';
 import { HomePage} from '../pages/homePage';
+import { CartPage } from '../pages/cartPage';
 
 test('Login test', async ({page}) => {
 
@@ -17,6 +18,13 @@ test('Login test', async ({page}) => {
     await expect(page.locator(homePage.productsTitle)).toBeVisible();
     await expect(page.locator(homePage.productsTitle)).toHaveText("Products");
     await homePage.addProductToCart("Sauce Labs Fleece Jacket");
-    // await homePage.getShoppingCartLink().click();
+
+    await homePage.goToCart();
+    await page.waitForTimeout(3000);
+
+    // Cart Page
+    const cartPage = new CartPage(page);
+    await expect(cartPage.getCartTitle()).toHaveText("Your Cart");
+    expect(await cartPage.checkProductInCart("Sauce Labs Fleece Jacket")).toBe(true);
     await page.waitForTimeout(3000);
 });

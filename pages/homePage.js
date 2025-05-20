@@ -23,7 +23,7 @@ class HomePage {
         }
     }
 
-    async getShoppingCartLink() {
-        return this.page.locator(this.shoppingCart);
+    async goToCart() {
+        await this.page.locator(this.shoppingCart).click();
     }
 }
